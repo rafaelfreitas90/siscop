@@ -2,6 +2,7 @@ package siscop.views;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import siscop.controllers.ProdutosCadastradosController;
 import siscop.dao.SalvarEntidades;

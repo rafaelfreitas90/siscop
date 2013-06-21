@@ -13,10 +13,16 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
 
     private SalvarEntidades dao = new SalvarEntidades();
     private Produto produto = new Produto();
+    private CadastroPedido pedido;
 
     public ProdutosCadastrados() {
         initComponents();
         preencherTabela();
+    }
+    
+        public ProdutosCadastrados(CadastroPedido pedido) {
+        initComponents();
+        this.pedido = pedido;      
     }
 
     @SuppressWarnings("unchecked")
@@ -71,6 +77,11 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
         tableProdutosCadastrados.getColumnModel().getColumn(2).setPreferredWidth(15);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/siscop/views/Add.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/siscop/views/Cancelar.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,11 +110,11 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(231, 231, 231))
+                .addGap(190, 190, 190))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,20 +126,28 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableProdutosCadastradosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosCadastradosMouseClicked
-      
+         int lin = tableProdutosCadastrados.getSelectedRow();
+        (tableProdutosCadastrados.getModel().getValueAt(lin, 0).toString());
+        textNome.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 1).toString());
+        textTel.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 2).toString());
+        textCnpj.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 3).toString());
     }//GEN-LAST:event_tableProdutosCadastradosMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
