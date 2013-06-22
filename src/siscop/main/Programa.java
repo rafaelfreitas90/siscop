@@ -13,7 +13,8 @@ public class Programa {
    
     public static void main(String[] args) {
         
-        LoginController.getInstancia().exibirInterfaceGrafica();
+//        LoginController.getInstancia().exibirInterfaceGrafica();
+        TelaPrincipalController.getInstancia().exibirInterfaceGrafica();
 
     }
 }

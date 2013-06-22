@@ -320,4 +320,13 @@ public class CadastroPedido extends javax.swing.JFrame {
         modelo.addRow(new Object[]{textDescProduto.getText(), textQtdProd.getText(),textValorProd.getText()});
 
     }
+    
+    public void preencheCamposTexto(String cod, String desc, String valor){  
+        
+        texCodProduto.setText(cod);
+        textDescProduto.setText(desc);
+        textValorProd.setText(valor);
+  
+    }
+    
 }
