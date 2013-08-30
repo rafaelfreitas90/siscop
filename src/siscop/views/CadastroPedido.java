@@ -1,7 +1,6 @@
 package siscop.views;
 
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import siscop.controllers.ProdutosCadastradosController;
@@ -18,7 +17,8 @@ public class CadastroPedido extends javax.swing.JFrame {
     private Produto produto1 = new Produto();
 
     public CadastroPedido() {
-        initComponents();
+        initComponents(); 
+        preencheCamposTexto(null, null, null);
     }
 
     @SuppressWarnings("unchecked")
@@ -30,7 +30,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePedido = new javax.swing.JTable();
-        texCodProduto = new javax.swing.JTextField();
+        textCodProduto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         textDescProduto = new javax.swing.JTextField();
@@ -84,15 +84,15 @@ public class CadastroPedido extends javax.swing.JFrame {
         tablePedido.getColumnModel().getColumn(1).setPreferredWidth(15);
         tablePedido.getColumnModel().getColumn(2).setPreferredWidth(15);
 
-        texCodProduto.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
-        texCodProduto.addActionListener(new java.awt.event.ActionListener() {
+        textCodProduto.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        textCodProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                texCodProdutoActionPerformed(evt);
+                textCodProdutoActionPerformed(evt);
             }
         });
-        texCodProduto.addFocusListener(new java.awt.event.FocusAdapter() {
+        textCodProduto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                texCodProdutoFocusLost(evt);
+                textCodProdutoFocusLost(evt);
             }
         });
 
@@ -164,7 +164,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(texCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(textDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -211,7 +211,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(texCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textValorProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textQtdProd)))
@@ -253,21 +253,21 @@ public class CadastroPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarProdutoActionPerformed
-        ProdutosCadastradosController.getInstancia().exibirInterfaceGrafica();
+        ProdutosCadastradosController.getInstancia().exibirInterfaceGrafica(this);
     }//GEN-LAST:event_buttonBuscarProdutoActionPerformed
 
     private void textDescProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDescProdutoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDescProdutoActionPerformed
 
-    private void texCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_texCodProdutoFocusLost
-        Long idProduto = Long.parseLong(texCodProduto.getText());
+    private void textCodProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textCodProdutoFocusLost
+        Long idProduto = Long.parseLong(textCodProduto.getText());
         List<Produto> produtos = dao.ListarProdutosPorId(idProduto);
         for (Produto produto : produtos) {
             textDescProduto.setText(produto.getDescricao());
             textValorProd.setText(produto.getValor().toString());;
         }
-    }//GEN-LAST:event_texCodProdutoFocusLost
+    }//GEN-LAST:event_textCodProdutoFocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
@@ -285,9 +285,9 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textQtdProdFocusLost
 
-    private void texCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texCodProdutoActionPerformed
+    private void textCodProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCodProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_texCodProdutoActionPerformed
+    }//GEN-LAST:event_textCodProdutoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        
@@ -307,7 +307,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablePedido;
-    private javax.swing.JTextField texCodProduto;
+    private javax.swing.JTextField textCodProduto;
     private javax.swing.JTextField textDescProduto;
     private javax.swing.JTextField textQtdProd;
     private javax.swing.JTextField textTotalPedido;
@@ -321,12 +321,46 @@ public class CadastroPedido extends javax.swing.JFrame {
 
     }
     
-    public void preencheCamposTexto(String cod, String desc, String valor){  
-        
-        texCodProduto.setText(cod);
-        textDescProduto.setText(desc);
-        textValorProd.setText(valor);
-  
+    public void preencheTabela2(String a, String b, String c) {
+        DefaultTableModel modelo = (DefaultTableModel) tablePedido.getModel();      
+
+        modelo.addRow(new Object[]{a, textQtdProd.getText(),textValorProd.getText()});
+
     }
     
+
+    public JTextField getTextCodProduto() {
+        return textCodProduto;
+    }
+
+    public void setTextCodProduto(String a) {
+        this.textCodProduto.setText(a);
+    }
+
+    public JTextField getTextDescProduto() {
+        return textDescProduto;
+    }
+
+    public void setTextDescProduto(String b) {
+        this.textDescProduto.setText(b);
+    }
+
+    public JTextField getTextValorProd() {
+        return textValorProd;
+    }
+
+    public void setTextValorProd(String c) {
+        this.textValorProd.setText(c);
+    }
+    
+    
+       public void  preencheCamposTexto(String a, String b, String c){  
+        
+     setTextCodProduto(a);
+     setTextDescProduto(b);
+     setTextValorProd(c);     
+  
+}
+       
+
 }

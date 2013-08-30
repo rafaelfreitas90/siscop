@@ -1,5 +1,6 @@
 package siscop.controllers;
 
+import siscop.views.CadastroPedido;
 import siscop.views.ProdutosCadastrados;
 
 /**
@@ -19,9 +20,9 @@ public class ProdutosCadastradosController {
         return instancia;
     }
     
-    public void exibirInterfaceGrafica(){
+    public void exibirInterfaceGrafica(CadastroPedido cadped){
         if (view == null){
-            view = new ProdutosCadastrados();
+            view = new ProdutosCadastrados(cadped);
         }
         view.setVisible(true);
     }

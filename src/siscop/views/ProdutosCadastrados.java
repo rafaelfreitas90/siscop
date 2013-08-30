@@ -2,6 +2,7 @@ package siscop.views;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import siscop.controllers.CadastroPedidoController;
 import siscop.dao.SalvarEntidades;
 import siscop.entidades.Produto;
 
@@ -13,16 +14,16 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
 
     private SalvarEntidades dao = new SalvarEntidades();
     private Produto produto = new Produto();
-    private CadastroPedido pedido;
+    private CadastroPedido pedido = null;
 
     public ProdutosCadastrados() {
         initComponents();
         preencherTabela();
     }
-    
-        public ProdutosCadastrados(CadastroPedido pedido) {
-        initComponents();
-        this.pedido = pedido;      
+
+    public ProdutosCadastrados(CadastroPedido pedido) {
+        this();
+        this.pedido = pedido;
     }
 
     @SuppressWarnings("unchecked")
@@ -32,11 +33,11 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
         textValorProd = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProdutosCadastrados = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnIncluir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        textCodProduto = new javax.swing.JTextField();
-        textDescProduto = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        textCodProduto1 = new javax.swing.JTextField();
+        textDescProduto1 = new javax.swing.JTextField();
+        textValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(300, 100, 0, 0));
@@ -79,10 +80,10 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
         tableProdutosCadastrados.getColumnModel().getColumn(2).setResizable(false);
         tableProdutosCadastrados.getColumnModel().getColumn(2).setPreferredWidth(15);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/siscop/views/Add.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/siscop/views/Add.png"))); // NOI18N
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIncluirActionPerformed(evt);
             }
         });
 
@@ -93,11 +94,11 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
             }
         });
 
-        textCodProduto.setEditable(false);
+        textCodProduto1.setEditable(false);
 
-        textDescProduto.setEditable(false);
+        textDescProduto1.setEditable(false);
 
-        jTextField3.setEditable(false);
+        textValor.setEditable(false);
 
         javax.swing.GroupLayout textValorProdLayout = new javax.swing.GroupLayout(textValorProd);
         textValorProd.setLayout(textValorProdLayout);
@@ -109,17 +110,16 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(textValorProdLayout.createSequentialGroup()
                         .addGroup(textValorProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textCodProduto))
+                            .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textCodProduto1))
                         .addGap(18, 18, 18)
                         .addGroup(textValorProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(textValorProdLayout.createSequentialGroup()
-                                .addComponent(textDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textDescProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(textValorProdLayout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(textValor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         textValorProdLayout.setVerticalGroup(
@@ -129,13 +129,13 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addGroup(textValorProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textDescProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCodProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textDescProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(textValorProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnIncluir))
                 .addGap(190, 190, 190))
         );
 
@@ -156,31 +156,34 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableProdutosCadastradosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProdutosCadastradosMouseClicked
-         int lin = tableProdutosCadastrados.getSelectedRow();         
-        textCodProduto.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 0).toString());
-        textDescProduto.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 1).toString());
-        textValorProd.setToolTipText(tableProdutosCadastrados.getModel().getValueAt(lin, 2).toString());
-        
-        
-        
+        int lin = tableProdutosCadastrados.getSelectedRow();
+        textCodProduto1.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 0).toString());
+        textDescProduto1.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 1).toString());
+        textValor.setText(tableProdutosCadastrados.getModel().getValueAt(lin, 2).toString());
+
     }//GEN-LAST:event_tableProdutosCadastradosMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        String cod1 = textCodProduto1.getText();
+        String desc1 = textDescProduto1.getText();
+        String valor1 = textValor.getText();        
+        pedido.preencheCamposTexto(cod1, desc1, valor1);   
 
+//        CadastroPedidoController.getInstancia().exibirInterfaceGrafica();
+        this.dispose();
+    }//GEN-LAST:event_btnIncluirActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIncluir;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable tableProdutosCadastrados;
-    private javax.swing.JTextField textCodProduto;
-    private javax.swing.JTextField textDescProduto;
+    private javax.swing.JTextField textCodProduto1;
+    private javax.swing.JTextField textDescProduto1;
+    private javax.swing.JTextField textValor;
     private javax.swing.JPanel textValorProd;
     // End of variables declaration//GEN-END:variables
 
@@ -190,11 +193,9 @@ public class ProdutosCadastrados extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tableProdutosCadastrados.getModel();
 
         for (Produto objeto : produtos) {
-            
+
             modelo.addRow(new Object[]{objeto.getId(), objeto.getDescricao(), objeto.getValor()});
-            
+
         }
     }
-    
-    
 }
